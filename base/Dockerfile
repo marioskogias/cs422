@@ -11,5 +11,6 @@ ADD keys/fakekey.pub /root/.ssh/id_rsa.pub
 ADD keys/config /root/.ssh/config
 RUN cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
 ADD config/bashrc /root/.bashrc
+RUN chmod 400 /root/.ssh/id_rsa
 
 ENTRYPOINT service ssh restart && sleep infinity
