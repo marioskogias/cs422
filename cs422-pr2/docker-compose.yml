@@ -1,0 +1,22 @@
+version: '3'
+services:
+  master:
+    image: diasmaster
+    environment:
+     - MASTER_SCRIPT=master.sh
+    volumes:
+     - ./workloads:/root/workloads
+     - ./jars:/root/jars
+     - ./scripts:/root/scripts
+     - ./config/slaves:/root/hadoop-2.7.5/etc/hadoop/slaves:ro
+    depends_on:
+      - slave
+    ports:
+      - 50075:50075
+      - 50070:50070
+      - 8080:8080
+      - 7077:7077
+  slave:
+    volumes:
+      - ./config/slaves:/root/hadoop-2.7.5/etc/hadoop/slaves:ro
+    image: diasslave
